@@ -3,11 +3,15 @@
 // @namespace    youtube-ext
 // @version      2.1.4
 // @description  Набор улучшений YouTube: скорость воспроизведения отдельно для каждого канала, автозапуск видео, плавающее окно плеера при прокрутке комментариев
-// @author       you
+// @author       Deito
 // @match        https://www.youtube.com/*
 // @grant        GM_getValue
 // @grant        GM_setValue
 // @noframes
+// @homepageURL  https://github.com/r35p3ct/Youtube-ext
+// @supportURL   https://github.com/r35p3ct/Youtube-ext/issues
+// @updateURL    https://raw.githubusercontent.com/r35p3ct/Youtube-ext/main/youtube-ext.user.js
+// @downloadURL  https://raw.githubusercontent.com/r35p3ct/Youtube-ext/main/youtube-ext.user.js
 // @run-at       document-start
 // ==/UserScript==
 
