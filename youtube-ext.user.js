@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         YouTube Ext
 // @namespace    youtube-ext
-// @version      2.1.4
+// @version      2.1.5
 // @description  Набор улучшений YouTube: скорость воспроизведения отдельно для каждого канала, автозапуск видео, плавающее окно плеера при прокрутке комментариев
 // @author       Deito
 // @match        https://www.youtube.com/*
@@ -111,6 +111,10 @@
 
     function isWatchPage() {
         return location.pathname === '/watch';
+    }
+
+    function isShortsPage() {
+        return location.pathname.startsWith('/shorts/');
     }
 
     let lastChannel = null;
@@ -428,6 +432,7 @@
         if (getSetting('autoplay')) return;
         const video = e.target;
         if (!video || isPreviewVideo(video)) return;
+        if (isShortsPage()) return; // шортсы — исключение: пауза только для обычных видео
 
         if (userInitiatedPlay()) {
             userPlayedId = currentVideoId(); // пользователь запустил сам — больше не вмешиваемся
@@ -441,7 +446,7 @@
     // Страховка: если ролик начал играть до того, как мы навесили слушатель play
     function pauseIfPlaying() {
         if (getSetting('autoplay')) return;
-        if (!isWatchPage()) return;
+        if (!isWatchPage() || isShortsPage()) return;
         const vid = currentVideoId();
         if (!vid || vid === userPlayedId) return;
         const video = getVideo();

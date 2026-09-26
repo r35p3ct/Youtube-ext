@@ -16,6 +16,7 @@ A set of YouTube enhancements in a single userscript: per-channel playback speed
 - The "Play videos automatically" toggle: when off, an opened video is paused immediately and stays paused until you press Play yourself.
 - YouTube may start playback again after the video finishes loading — the script suppresses every automatic start but never interferes after you press Play.
 - Ads are left untouched.
+- Shorts are excluded: the pause applies to regular videos only.
 
 ### Floating player window
 - When the player scrolls completely out of view while reading comments, the video moves into a compact 426×240 window in the bottom-right corner.
