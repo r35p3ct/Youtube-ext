@@ -35,7 +35,7 @@ Alternatively, create a new script in Tampermonkey and paste the contents of `yo
 
 ## Settings
 
-A gear button **to the left of YouTube's own gear** in the player control bar opens the settings popup:
+A wrench button **to the left of YouTube's own gear** in the player control bar opens the settings popup:
 
 | Group | Toggle | Effect |
 |---|---|---|

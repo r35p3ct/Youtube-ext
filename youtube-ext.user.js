@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         YouTube Ext
 // @namespace    youtube-ext
-// @version      2.1.5
+// @version      2.1.6
 // @description  Набор улучшений YouTube: скорость воспроизведения отдельно для каждого канала, автозапуск видео, плавающее окно плеера при прокрутке комментариев
 // @author       Deito
 // @match        https://www.youtube.com/*
@@ -551,16 +551,18 @@ ytd-watch-flexy[float] #cinematics {display: none !important;}\
     // Кнопка настроек в панели плеера и всплывающее окно
     //=====================================================================
 
-    const GEAR_PATH = 'M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.07-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61 l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4,2.81c-0.04-0.24-0.24-0.41-0.48-0.41 h-3.84c-0.24,0-0.43,0.17-0.47,0.41L9.25,5.35C8.66,5.59,8.12,5.92,7.63,6.29L5.24,5.33c-0.22-0.08-0.47,0-0.59,0.22L2.74,8.87 C2.62,9.08,2.66,9.34,2.86,9.48l2.03,1.58C4.84,11.36,4.8,11.69,4.8,12s0.02,0.64,0.07,0.94l-2.03,1.58 c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54 c0.05,0.24,0.24,0.41,0.48,0.41h3.84c0.24,0,0.44-0.17,0.47-0.41l0.36-2.54c0.59-0.24,1.13-0.56,1.62-0.94l2.39,0.96 c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.22,0.07-0.47-0.12-0.61L19.14,12.94z M12,15.6c-1.98,0-3.6-1.62-3.6-3.6 s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z';
+    // Гаечный ключ (Material Icons «build»), чтобы не путать кнопку со штатной
+    // шестерёнкой настроек YouTube
+    const WRENCH_PATH = 'M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z';
 
     // SVG собирается через createElementNS: на youtube.com действует Trusted Types CSP,
     // присвоение innerHTML со строкой бросает TypeError и кнопка не создаётся
-    function makeGearIcon() {
+    function makeWrenchIcon() {
         const NS = 'http://www.w3.org/2000/svg';
         const svg = document.createElementNS(NS, 'svg');
         svg.setAttribute('viewBox', '0 0 24 24');
         const path = document.createElementNS(NS, 'path');
-        path.setAttribute('d', GEAR_PATH);
+        path.setAttribute('d', WRENCH_PATH);
         svg.appendChild(path);
         return svg;
     }
@@ -603,7 +605,7 @@ html[dark] #ycs-popup .ycs-group {border-top-color: rgba(255,255,255,.12);}\
         btn.className = 'ytp-button ycs-settings-button';
         btn.title = 'YouTube Ext — настройки';
         btn.setAttribute('aria-label', 'YouTube Ext — настройки');
-        btn.appendChild(makeGearIcon());
+        btn.appendChild(makeWrenchIcon());
 
         // Клик по нашей кнопке не должен запускать/ставить паузу видео
         const stop = (e) => e.stopPropagation();
